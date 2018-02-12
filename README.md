@@ -1,8 +1,8 @@
-Map Assignment
+# Map Assignment
  
 This is the sample application in which - 
  
-The user see a screen with a map and an upload button. The upload button show the user a standard dialog box which only accept CSV files. The user is able to upload a CSV file using this dialog (Test/sample CSV is attached).
+The user see a screen with a map and an upload button. The upload button show the user a standard dialog box which only accept CSV files. The user is able to upload a CSV file using this dialog (Test/sample CSV (AddressInput.csv) is attached).
 
 The application parse the uploaded CSV file and split the address into chunks: Unit, Street, Town/City, State, Zip Code, Country.
 
@@ -12,7 +12,7 @@ Clicking on each address show a table with the split chunks in a popup.
 
 The user is shown a new download button. If the user clicks on the download button, it show them a standard dialog box allowing the user to download a CSV file with the split chunks.
 
-Steps to Deploy on IIS Server - 
+# Steps to Deploy on IIS Server - 
 
 1. Download the code and extract it.
 2. Open project in Visual Studio and then right click on your project, and then select “Publish”. It should bring up the dialog.
