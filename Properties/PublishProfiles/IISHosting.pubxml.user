@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\ranu.jaiswal\Desktop\Map</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/CsvHelper.dll">
+      <publishTime>02/08/2018 10:41:14</publishTime>
+    </File>
+    <File Include="bin/MapAssignment.dll">
+      <publishTime>02/12/2018 17:11:06</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>02/07/2018 14:49:27</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Mvc.FixedDisplayModes.dll">
+      <publishTime>02/07/2018 14:49:28</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>02/07/2018 14:49:24</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>02/07/2018 14:49:29</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>02/07/2018 14:49:27</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>02/07/2018 14:49:29</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>02/07/2018 14:49:30</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>02/07/2018 14:49:28</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>02/07/2018 14:49:27</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>02/07/2018 14:49:27</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>02/07/2018 14:49:28</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>02/07/2018 14:49:28</publishTime>
+    </File>
+    <File Include="bin/Utilities.Common.dll">
+      <publishTime>02/09/2018 19:10:05</publishTime>
+    </File>
+    <File Include="bin/Utilities.dll">
+      <publishTime>02/09/2018 19:10:05</publishTime>
+    </File>
+    <File Include="Content/jquery-ui.css">
+      <publishTime>02/07/2018 15:43:13</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>02/07/2018 14:49:04</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>02/09/2018 19:10:09</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.12.3.min.js">
+      <publishTime>02/07/2018 15:18:03</publishTime>
+    </File>
+    <File Include="Scripts/jquery-2.1.1.js">
+      <publishTime>02/07/2018 15:18:03</publishTime>
+    </File>
+    <File Include="Scripts/jquery-2.1.1.min.js">
+      <publishTime>02/07/2018 15:18:03</publishTime>
+    </File>
+    <File Include="Scripts/jquery-2.1.1.min.map">
+      <publishTime>02/07/2018 15:18:03</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui.min.js">
+      <publishTime>02/07/2018 15:18:03</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>02/07/2018 15:18:03</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>02/07/2018 15:18:03</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>02/07/2018 15:18:03</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>02/07/2018 15:18:03</publishTime>
+    </File>
+    <File Include="UtilitiesDocumentation/Utilities.chm">
+      <publishTime>02/09/2018 19:10:06</publishTime>
+    </File>
+    <File Include="Views/Map/MapIndex.cshtml">
+      <publishTime>02/12/2018 17:03:32</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>02/07/2018 14:49:04</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>02/12/2018 17:11:06</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

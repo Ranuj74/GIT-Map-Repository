@@ -1,0 +1,196 @@
+﻿@{
+    ViewBag.Title = "MapIndex";
+}
+
+<style>
+    .map {
+        height: 80%;
+        width: 80%;
+        border: 1px solid dimgrey;
+    }
+
+    .ui-dialog-titlebar {
+        width: 89%;
+    }
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
+<link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/blitzer/jquery-ui.css" rel="stylesheet" type="text/css" />
+
+<div style="width: 100%; height: 100%">
+    <div id="map_canvas" class="map"></div>
+
+    <div id="dialog" style="display: none" align="center">
+        <p style="display:none;font-size:12px;" id="error">Only CSV files are allowed!</p>
+        <form enctype="multipart/form-data" method="post" id="form">
+            <input type="file" name="file" id="file" accept=".csv" onchange="checkfile(this)" />
+            <input type="submit" id="btnUpload" value="Upload" />
+        </form>
+    </div>
+
+
+    <div id="download" style="display: none" align="center">
+        <form id="formDownload" method="post">
+            <input type="button" value="Download" id="btnDownloadInner" />
+        </form>
+    </div>
+    <table>
+        <tr>
+            <td><input class="ui-button" type="button" value="Upload" id="btnShow" /></td>
+            <td><input class="ui-button" type="button" value="Download" id="btnDownload" style="display: none" /></td>
+        </tr>
+    </table>
+</div>
+
+
+
+<script type="text/javascript">
+
+    function initMap(data) {
+        var canvas = $("#map_canvas");
+
+        var latitude = 40.0349798;
+        var longitude = -74.71512;
+
+        var latlng = new google.maps.LatLng(latitude, longitude);
+        var options = {
+            zoom: 16,
+            center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(canvas[0], options);
+
+        if (data != null) {
+            var infowindow = new google.maps.InfoWindow();
+            for (var i = 0; i < data.length; i++) {
+                console.log(data[i]);
+
+                var latlng = new google.maps.LatLng(data[i].lat, data[i].lng);
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(data[i].lat, data[i].lng),
+                    map: map
+                });
+
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+
+                        infowindow.setOptions({
+                            content: '<table style="color:black;font-size:12px;"><tr><td>Unit : </td><td>' + data[i].Unit + '</td></tr><tr><td>Street : </td><td>' + data[i].Street + '</td></tr><tr><td>Town/City : </td><td>' + data[i].Town + '</td></tr><tr><td>State : </td><td>' + data[i].State + '</td></tr><tr><td>Zip Code</td><td>' + data[i].ZipCode + '</td></tr><tr><td>Country : </td><td>' + data[i].Country + '</td></tr></table>',
+                            maxWidth: 300
+                        });
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+            }
+        }
+    }
+
+    function checkfile(sender) {
+        var validExts = new Array(".csv");
+        var fileExt = sender.value;
+        fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
+        if (validExts.indexOf(fileExt) < 0) {
+            $("#file").replaceWith($("#file").val('').clone(true));
+            $("#error").css("display", "block");
+            return false;
+        }
+        else {
+            $("#error").css("display", "none");
+            return true;
+        }
+    }
+
+    $(function () {
+
+        var dialog = $("#dialog").dialog({
+            modal: true,
+            autoOpen: false,
+            title: "Upload file",
+            width: 350,
+            height: 150
+        }).prev(".ui-dialog-titlebar").css("background", "orange");
+
+        var dialogDownload = $("#download").dialog({
+            modal: true,
+            autoOpen: false,
+            title: "Download CSV file",
+            width: 350,
+            height: 150
+        }).prev(".ui-dialog-titlebar").css("background", "orange");
+
+        $("#btnShow").click(function () {
+            $("#file").replaceWith($("#file").val('').clone(true));
+            $('#dialog').dialog('open');
+        });
+
+
+        $("#btnDownload").click(function () {
+            $('#download').dialog('open');
+        });
+
+        $("#btnUpload").click(function (event) {
+            if (document.getElementById("file").files.length > 0) {
+                event.preventDefault();
+                var form1 = $('#form')[0];
+                var data = new FormData(form);
+                $("#btnUpload").prop("disabled", true);
+                $.ajax({
+                    type: "POST",
+                    enctype: 'multipart/form-data',
+                    url: "@Url.Action("Upload","Map")",
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    timeout: 600000,
+                    success: function (data) {
+                        $("#btnUpload").prop("disabled", false);
+                        $("#btnDownload").css("display", "block");
+                        initMap(data);
+                        $('#dialog').dialog('close');
+
+                        var getUrl = '@Url.Action("DownloadExcelReport", "Map")';
+                        $("#btnDownloadInner").click(function () {
+
+                            $.ajax({
+                                type: "POST",
+
+                                url: "@Url.Action("ExportCSV", "Map")",
+                                data: JSON.stringify(data),
+                                contentType: 'application/json; charset=utf-8',
+                                cache: false,
+                                timeout: 600000,
+                                success: function (data) {
+
+                                    window.location.href = getUrl;
+                                    $('#download').dialog('close');
+                                },
+                                error: function (err) {
+
+                                }
+                            });
+                        });
+                    },
+                    error: function (e) {
+
+                    }
+                });
+            }
+            else {
+                return false;
+            }
+        });
+        function attachSecretMessage(marker, secretMessage) {
+            var infowindow = new google.maps.InfoWindow({
+                content: secretMessage
+            });
+
+            marker.addListener('click', function () {
+                infowindow.open(marker.get('map'), marker);
+            });
+        }
+
+    });
+
+</script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVlIlrlEO-GPofm3H9Q_MLvoW4VADWzFk&callback=initMap"></script>
